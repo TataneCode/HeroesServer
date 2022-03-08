@@ -11,10 +11,21 @@ Extensions used :
 * Typescript hero
 * Terminal
 
-# Awesome Project Build with TypeORM
+# How to use the project
 
-Steps to run this project:
+1. Copy .env.example to a .env file, fill your connection settings
+2. Add entities in ./src/entity
+3. Add controller in ./src/controller
+4. Configure routing in route.ts
 
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+# Run server
+
+* Nodemon is used for dev environment please use : *npm run dev*
+
+# Running migrations
+
+* Generate migration : *npm run typeorm migration:generate -- -n <migration_name>*
+* Run migration : *npm run typeorm migration:run*
+
+!!! Keep in mind that typeorm is shortcuted in the package.json !!!
+ 

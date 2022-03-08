@@ -1,16 +1,22 @@
-import "reflect-metadata";
-import {createConnection} from "typeorm";
-import * as express from "express";
-import * as bodyParser from "body-parser";
-import {Request, Response} from "express";
-import {Routes} from "./routes";
-import {User} from "./entity/User";
+import 'reflect-metadata';
+import { createConnection } from 'typeorm';
+import express from 'express';
+import * as bodyParser from 'body-parser';
+import { Request, Response } from 'express';
+import { Routes } from './routes';
+import { Hero } from './entity/hero';
+import helmet from 'helmet';
+import compression from 'compression';
+import cors from 'cors';
 
 createConnection().then(async connection => {
 
     require('dotenv').config();
     // create express app
     const app = express();
+    app.use(helmet());
+    app.use(compression());
+    app.use(cors());
     app.use(bodyParser.json());
 
     // register express routes from defined application routes
@@ -33,17 +39,13 @@ createConnection().then(async connection => {
     app.listen(3000);
 
     // insert new users for test
-    await connection.manager.save(connection.manager.create(User, {
-        firstName: "Timber",
-        lastName: "Saw",
-        age: 27
-    }));
-    await connection.manager.save(connection.manager.create(User, {
-        firstName: "Phantom",
-        lastName: "Assassin",
-        age: 24
+    await connection.manager.save(connection.manager.create(Hero, {
+        name: 'Batman',
+        alias: 'Bruce Wayne',
+        strength: 5,
+        createdOn: new Date(),
     }));
 
-    console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
+    console.log('Express server has started on port 3000. Open http://localhost:3000/heroes to see results');
 
 }).catch(error => console.log(error));

@@ -1,18 +1,21 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
-export class User {
+export class Hero {
 
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
-    firstName: string;
+    name: string;
 
     @Column()
-    lastName: string;
+    alias: string;
 
     @Column()
-    age: number;
+    strength: number;
+
+    @Column('date')
+    createdOn: Date;
 
 }

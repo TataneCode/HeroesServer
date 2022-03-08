@@ -1,26 +1,26 @@
 import { getRepository } from "typeorm";
 import { NextFunction, Request, Response } from "express";
-import { User } from "../entity/User";
+import { Hero } from "../entity/hero";
 
-export class UserController {
+export class HeroController {
 
-    private userRepository = getRepository(User);
+    private heroRepository = getRepository(Hero);
 
     async all(request: Request, response: Response, next: NextFunction) {
-        return this.userRepository.find();
+        return this.heroRepository.find();
     }
 
     async one(request: Request, response: Response, next: NextFunction) {
-        return this.userRepository.findOne(request.params.id);
+        return this.heroRepository.findOne(request.params.id);
     }
 
     async save(request: Request, response: Response, next: NextFunction) {
-        return this.userRepository.save(request.body);
+        return this.heroRepository.save(request.body);
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {
-        let userToRemove = await this.userRepository.findOne(request.params.id);
-        await this.userRepository.remove(userToRemove);
+        let heroToRemove = await this.heroRepository.findOne(request.params.id);
+        await this.heroRepository.remove(heroToRemove);
     }
 
 }
