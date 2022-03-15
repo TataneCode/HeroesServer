@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne } from "typeorm";
+import { League } from "./league";
+import { Power } from "./power";
 
 @Entity()
 export class Hero {
@@ -6,16 +8,21 @@ export class Hero {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ length : 64 })
     name: string;
 
-    @Column()
+    @Column({ length : 255 })
     alias: string;
 
-    @Column()
-    strength: number;
+    @OneToOne(() => Power)
+    @JoinColumn()
+    power?: Power;
 
-    @Column('date')
+    @ManyToOne(() => League, league => league.heroes)
+    @JoinColumn()
+    league: League;
+
+    @Column('timestamptz')
     createdOn: Date;
 
 }

@@ -8,6 +8,8 @@ import { Hero } from './entity/hero';
 import helmet from 'helmet';
 import compression from 'compression';
 import cors from 'cors';
+import { League } from './entity/league';
+import { Power } from './entity/power';
 
 createConnection().then(async connection => {
 
@@ -39,13 +41,27 @@ createConnection().then(async connection => {
     app.listen(3000);
 
     // insert new users for test
-    await connection.manager.save(connection.manager.create(Hero, {
-        name: 'Batman',
-        alias: 'Bruce Wayne',
-        strength: 5,
-        createdOn: new Date(),
-    }));
+    var league = new League();
+    league.name = 'Gotham city';
 
-    console.log('Express server has started on port 3000. Open http://localhost:3000/heroes to see results');
+    var power = new Power();
+    power.name = 'Cleverness';
+    power.strength = 5;
+
+    var hero = new Hero();
+    hero.name = 'Batman';
+    hero.alias = 'Bruce Wayne';
+    hero.power = power;
+    hero.league = league;
+    hero.createdOn = new Date();
+
+    await connection.manager.save(league);
+    await connection.manager.save(power);
+    await connection.manager.save(hero);
+
+    console.log(`Express server has started on port 3000. Open URL :
+    * http://localhost:3000/heroes
+    * http://localhost:3000/leagues
+    * http://localhost:3000/powers `);
 
 }).catch(error => console.log(error));
