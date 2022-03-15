@@ -8,10 +8,10 @@ export class Hero {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ length : 64 })
+    @Column({ length: 64 })
     name: string;
 
-    @Column({ length : 255 })
+    @Column({ length: 255 })
     alias: string;
 
     @OneToOne(() => Power)
@@ -22,7 +22,7 @@ export class Hero {
     @JoinColumn()
     league: League;
 
-    @Column('timestamptz')
+    @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
     createdOn: Date;
 
 }

@@ -1,15 +1,13 @@
-# Build a rest api with stack :
-*typescript*, *express*, *postgre*, *typeorm*
+# Project description
+The purpose of this project is to build a sample for rest API using :
+> Express
+> Typescript
+> TypeOrm
+> Postgre SQL
 
-Extensions used :
-* Angular language service
-* Angular snippets
-* Json to TS
-* Path intellisense
-* Rest client
-* TSLint
-* Typescript hero
-* Terminal
+# Pre-requisites
+* Node 14.17.3
+* PostgreSQL instance up and running
 
 # How to use the project
 
@@ -28,4 +26,20 @@ Extensions used :
 * Run migration : *npm run typeorm migration:run*
 
 !!! Keep in mind that typeorm is shortcuted in the package.json !!!
+
+# Clean DB
+> drop table hero;
+> drop table league;
+> drop table power;
+> drop table migrations;
+> drop table typeorm_metadata;
  
+# Extensions used
+* Angular language service
+* Angular snippets
+* Json to TS
+* Path intellisense
+* Rest client
+* TSLint
+* Typescript hero
+* Terminal

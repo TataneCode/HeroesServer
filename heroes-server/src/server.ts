@@ -16,10 +16,6 @@ createConnection().then(async connection => {
     require('dotenv').config();
     // create express app
     const app = express();
-    app.use(helmet());
-    app.use(compression());
-    app.use(cors());
-    app.use(bodyParser.json());
 
     // register express routes from defined application routes
     Routes.forEach(route => {
@@ -34,8 +30,11 @@ createConnection().then(async connection => {
         });
     });
 
-    // setup express app here
-    // ...
+    // setup express
+    app.use(helmet());
+    app.use(compression());
+    app.use(cors());
+    app.use(bodyParser.json());
 
     // start express server
     app.listen(3000);
@@ -53,7 +52,6 @@ createConnection().then(async connection => {
     hero.alias = 'Bruce Wayne';
     hero.power = power;
     hero.league = league;
-    hero.createdOn = new Date();
 
     await connection.manager.save(league);
     await connection.manager.save(power);
